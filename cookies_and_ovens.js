@@ -22,11 +22,15 @@
 
 class Kue {
   constructor(time) {
-    this.timeCook = time || 60;
+    this.name = '';
+    this.stepCook = [];
     this.stepTime = 0;
   }
-  nextMinute() {
+  nextFiveMinute() {
     this.stepTime++;
+  }
+  getStatus() {
+    return this.stepTime > this.stepCook.length ? 'hangus' : this.stepCook[this.stepTime];
   }
 }
 
@@ -34,9 +38,7 @@ class KueCoklat extends Kue {
   constructor(time) {
     super();
     this.name = 'Kue Coklat';
-    this.timeCook = time || 20;
-    this.stepCook = ['mentah', 'mentah', 'hampir matang', 'matang', 'hangus'];
-    this.status = this.stepCook[this.stepTime];
+    this.stepCook = ['mentah', 'mentah', 'hampir matang', 'matang', 'hangus']; // 20
   }
 }
 
@@ -44,7 +46,7 @@ class KueKacang extends Kue {
   constructor(time) {
     super();
     this.name = 'Kue Kacang';
-    this.timeCook = time || 30;
+    this.stepCook = ['mentah', 'mentah', 'mentah', 'hampir matang', 'hampir matang', 'hampir matang', 'matang', 'hangus']; // 30
   }
 }
 
@@ -52,7 +54,7 @@ class KueKeju extends Kue {
   constructor(time) {
     super();
     this.name = 'Kue Keju';
-    this.timeCook = time || 35;
+    this.stepCook = ['mentah', 'mentah', 'mentah', 'mentah', 'hampir matang', 'hampir matang', 'hampir matang', 'matang', 'hangus']; // 35
   }
 }
 
@@ -68,13 +70,13 @@ class Koki {
       console.log(`Kamu belum memasak apapun!`);
     } else {
       for(let i = 0; i < this.allCookies.length; i++) {
-        this.allCookies[i].nextMinute();
+        this.allCookies[i].nextFiveMinute();
       }
     }
   }
   lihatStatusMakanan() {
     for (let c of this.allCookies) {
-      console.log(`Status masakan ${c.name} adalah: ${c.status}`);
+      console.log(`Status masakan ${c.name} adalah: ${c.getStatus()}`);
     }
   }
 }
@@ -93,15 +95,27 @@ let koki = new Koki();
 koki.limaMenitBerikutnya();
 
 koki.tambahkanMasakan(new KueCoklat());
+koki.tambahkanMasakan(new KueKacang());
+koki.tambahkanMasakan(new KueKeju());
 
-koki.limaMenitBerikutnya();
-koki.limaMenitBerikutnya();
-// console.log(koki);
 
+console.log('\n############### lihat status 1 ###############');
 koki.lihatStatusMakanan();
 
 koki.limaMenitBerikutnya();
+
+console.log('\n############### lihat status 2 ###############');
+koki.lihatStatusMakanan();
+
 koki.limaMenitBerikutnya();
+
+console.log('\n############### lihat status 3 ###############');
+koki.lihatStatusMakanan();
+
+koki.limaMenitBerikutnya();
+
+
+console.log('\n############### lihat status 4 ###############');
 koki.lihatStatusMakanan();
 
 
