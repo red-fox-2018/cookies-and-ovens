@@ -10,20 +10,31 @@
 // Your code here
 
 class Oven{
-    static bake(kue,timeBake){
+    constructor(){
+      this.tray = []
+    }
+    addCookie(cookie){
+      this.tray.push(cookie)
+    }
+    bake(timeBake){
       let time = 0
       while(time <timeBake){
         time +=5
-        if(time === kue.matang){
-          kue.status = 'matang'
-        }else if(time <= kue.matang/2){
-          kue.status = 'mentah'
-        }else if(time < kue.matang){
-          kue.status = 'hampir matang'
-        }else{
-            kue.status = 'hangus'
+        console.log(`===============time : ${time} minutes===============`)
+        let len = this.tray.length
+        for(let i=0;i<len;i++){
+          let  kue = this.tray[i]
+          if(time === kue.matang){
+            kue.status = 'matang'
+          }else if(time <= kue.matang/2){
+            kue.status = 'mentah'
+          }else if(time < kue.matang){
+            kue.status = 'hampir matang'
+          }else{
+              kue.status = 'hangus'
+          }
+          console.log(`${kue.name}, menit ke ${time} : ${kue.status}`)
         }
-        console.log(`${kue.name}, menit ke ${time} : ${kue.status}`)
       }
     }
 }
@@ -53,10 +64,11 @@ class Keju extends Cookie{
     super('Kue keju',35)
   }
 }
-
+let oven = new Oven()
 let kacang = new Kacang()
-Oven.bake(kacang,30)
 let coklat = new Coklat()
-Oven.bake(coklat,25)
 let keju = new Keju()
-Oven.bake(keju,25)
+oven.addCookie(kacang)
+oven.addCookie(coklat)
+oven.addCookie(keju)
+oven.bake(30)
