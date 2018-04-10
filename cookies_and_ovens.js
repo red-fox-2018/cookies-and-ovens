@@ -4,8 +4,8 @@
 //
 // - What are essential classes? cookies,oven,coklat,kacang,kejur
 // - What attributes will each class have? name, status, roasted time
-// - What interface will each class provide?
-// - How will the classes interact with each other?
+// - What interface will each class provide? inheritance, agregation
+// - How will the classes interact with each other? coklat,kacang, and keju have parent Cookies class, baked in Oven at the same time
 // - Which classes will inherit from others, if any? coklat,kacang,keju
 //
 //
@@ -64,12 +64,9 @@ class Oven{
 }
 for(let time=0;time<=30;time+=5){
     Oven.bake(cookies)
-    let coklat = cookies[0]
-    let kacang = cookies[1]
-    let keju = cookies[2]
     console.log()  
-    console.log(`-------------- Menit ke ${time+5} -----------------`)  
-    console.log(`Kue ${coklat.name}, menit ke ${coklat.cooking_time} : ${coklat.status} `)
-    console.log(`Kue ${kacang.name}, menit ke ${kacang.cooking_time} : ${kacang.status} `)
-    console.log(`Kue ${keju.name}, menit ke ${keju.cooking_time} : ${keju.status} `)
+    console.log(`-------------- Menit ke ${time+5} -----------------`)
+    for(let i=0;i<cookies.length;i++){
+        console.log(`Kue ${cookies[i].name}, menit ke ${cookies[i].cooking_time} : ${cookies[i].status} `)
+    }
 }
